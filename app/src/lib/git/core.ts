@@ -206,6 +206,8 @@ function getDescriptionForError(error: DugiteError): string {
       return 'There aren’t any changes left to apply.'
     case DugiteError.NoMatchingRemoteBranch:
       return 'There aren’t any remote branches that match the current branch.'
+    case DugiteError.NoExistingRemoteBranch:
+      return 'Branch not found on remote branches.'
     case DugiteError.NothingToCommit:
       return 'There are no changes to commit.'
     case DugiteError.NoSubmoduleMapping:
