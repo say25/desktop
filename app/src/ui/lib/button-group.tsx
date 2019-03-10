@@ -30,7 +30,7 @@ export class ButtonGroup extends React.Component<IButtonGroupProps, {}> {
 
     React.Children.forEach(this.props.children, c => {
       if (typeof c !== 'string' && typeof c !== 'number') {
-        if (c.type === Button) {
+        if ((c as React.ReactElement).type === Button) {
           buttons.push(c as React.ReactElement<IButtonProps>)
         }
       }
