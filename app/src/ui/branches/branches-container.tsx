@@ -174,7 +174,7 @@ export class BranchesContainer extends React.Component<
     return assertNever(tab, `Unknown Branches tab: ${tab}`)
   }
 
-  private renderPullRequests() {
+  private renderPullRequests(): JSX.Element {
     if (
       this.props.isLoadingPullRequests &&
       this.props.pullRequests.length === 0

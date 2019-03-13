@@ -307,29 +307,25 @@ export class ChangesSidebar extends React.Component<IChangesSidebarProps, {}> {
 
   private renderMostRecentLocalCommit() {
     const commit = this.props.mostRecentLocalCommit
-    let child: JSX.Element | null = null
     if (commit) {
-      child = (
-        <UndoCommit
-          isPushPullFetchInProgress={this.props.isPushPullFetchInProgress}
-          commit={commit}
-          onUndo={this.onUndo}
-          emoji={this.props.emoji}
-        />
+      return (
+        <CSSTransitionGroup
+          transitionName="undo"
+          transitionAppear={true}
+          transitionAppearTimeout={UndoCommitAnimationTimeout}
+          transitionEnterTimeout={UndoCommitAnimationTimeout}
+          transitionLeaveTimeout={UndoCommitAnimationTimeout}
+        >
+          <UndoCommit
+            isPushPullFetchInProgress={this.props.isPushPullFetchInProgress}
+            commit={commit}
+            onUndo={this.onUndo}
+            emoji={this.props.emoji}
+          />
+        </CSSTransitionGroup>
       )
     }
-
-    return (
-      <CSSTransitionGroup
-        transitionName="undo"
-        transitionAppear={true}
-        transitionAppearTimeout={UndoCommitAnimationTimeout}
-        transitionEnterTimeout={UndoCommitAnimationTimeout}
-        transitionLeaveTimeout={UndoCommitAnimationTimeout}
-      >
-        {child}
-      </CSSTransitionGroup>
-    )
+    return null
   }
 
   private renderUndoCommit = (

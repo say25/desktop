@@ -142,19 +142,10 @@ export class CompareSidebar extends React.Component<
   public render() {
     const { allBranches, filterText, showBranchList } = this.props.compareState
     const placeholderText = getPlaceholderText(this.props.compareState)
-    const DivergingBannerAnimationTimeout = 300
 
     return (
       <div id="compare-view">
-        <CSSTransitionGroup
-          transitionName="diverge-banner"
-          transitionAppear={true}
-          transitionAppearTimeout={DivergingBannerAnimationTimeout}
-          transitionEnterTimeout={DivergingBannerAnimationTimeout}
-          transitionLeaveTimeout={DivergingBannerAnimationTimeout}
-        >
-          {this.renderNotificationBanner()}
-        </CSSTransitionGroup>
+        {this.renderNotificationBanner()}
 
         <div className="compare-form">
           <FancyTextBox
@@ -186,19 +177,30 @@ export class CompareSidebar extends React.Component<
     }
 
     const { inferredComparisonBranch } = this.props.compareState
+    const DivergingBannerAnimationTimeout = 300
 
     return inferredComparisonBranch.branch !== null &&
       inferredComparisonBranch.aheadBehind !== null &&
       inferredComparisonBranch.aheadBehind.behind > 0 ? (
-      <div className="diverge-banner-wrapper">
-        <NewCommitsBanner
-          dispatcher={this.props.dispatcher}
-          repository={this.props.repository}
-          commitsBehindBaseBranch={inferredComparisonBranch.aheadBehind.behind}
-          baseBranch={inferredComparisonBranch.branch}
-          onDismiss={this.onNotificationBannerDismissed}
-        />
-      </div>
+      <CSSTransitionGroup
+        transitionName="diverge-banner"
+        transitionAppear={true}
+        transitionAppearTimeout={DivergingBannerAnimationTimeout}
+        transitionEnterTimeout={DivergingBannerAnimationTimeout}
+        transitionLeaveTimeout={DivergingBannerAnimationTimeout}
+      >
+        <div className="diverge-banner-wrapper">
+          <NewCommitsBanner
+            dispatcher={this.props.dispatcher}
+            repository={this.props.repository}
+            commitsBehindBaseBranch={
+              inferredComparisonBranch.aheadBehind.behind
+            }
+            baseBranch={inferredComparisonBranch.branch}
+            onDismiss={this.onNotificationBannerDismissed}
+          />
+        </div>
+      </CSSTransitionGroup>
     ) : null
   }
 
