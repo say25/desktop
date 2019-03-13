@@ -53,11 +53,11 @@
     }
   }
 
-  .action-leave {
+  .action-exit {
     opacity: 1;
     transform: translate3d(0, 0, 0);
   }
-  .action-leave.action-leave-active {
+  .action-exit.action-exit-active {
     opacity: 0;
     transform: translate3d(100%, 0, 0);
     transition: opacity 200ms ease-in, transform 250ms var(--easing-ease-in-back);

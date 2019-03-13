@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { CSSTransitionGroup } from 'react-transition-group'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import { WindowState } from '../../lib/window-state'
 
 interface IFullScreenInfoProps {
@@ -101,18 +101,22 @@ export class FullScreenInfo extends React.Component<
     }
 
     return (
-      <CSSTransitionGroup
-        className="toast-notification-container"
-        transitionName="toast-animation"
-        component="div"
-        transitionAppear={true}
-        transitionEnter={false}
-        transitionLeave={true}
-        transitionAppearTimeout={transitionAppearDuration}
-        transitionLeaveTimeout={transitionLeaveDuration}
-      >
-        {this.renderFullScreenNotification()}
-      </CSSTransitionGroup>
+      <TransitionGroup>
+        <CSSTransition
+          className="toast-notification-container"
+          classNames="toast-animation"
+          component="div"
+          appear={true}
+          enter={false}
+          exit={true}
+          timeout={{
+            enter: transitionAppearDuration,
+            exit: transitionLeaveDuration,
+          }}
+        >
+          {this.renderFullScreenNotification()}
+        </CSSTransition>
+      </TransitionGroup>
     )
   }
 }

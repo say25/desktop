@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { CSSTransitionGroup } from 'react-transition-group'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import { IGitHubUser } from '../../lib/databases'
 import { Commit } from '../../models/commit'
@@ -182,25 +182,25 @@ export class CompareSidebar extends React.Component<
     return inferredComparisonBranch.branch !== null &&
       inferredComparisonBranch.aheadBehind !== null &&
       inferredComparisonBranch.aheadBehind.behind > 0 ? (
-      <CSSTransitionGroup
-        transitionName="diverge-banner"
-        transitionAppear={true}
-        transitionAppearTimeout={DivergingBannerAnimationTimeout}
-        transitionEnterTimeout={DivergingBannerAnimationTimeout}
-        transitionLeaveTimeout={DivergingBannerAnimationTimeout}
-      >
-        <div className="diverge-banner-wrapper">
-          <NewCommitsBanner
-            dispatcher={this.props.dispatcher}
-            repository={this.props.repository}
-            commitsBehindBaseBranch={
-              inferredComparisonBranch.aheadBehind.behind
-            }
-            baseBranch={inferredComparisonBranch.branch}
-            onDismiss={this.onNotificationBannerDismissed}
-          />
-        </div>
-      </CSSTransitionGroup>
+      <TransitionGroup>
+        <CSSTransition
+          classNames="diverge-banner"
+          appear={true}
+          timeout={DivergingBannerAnimationTimeout}
+        >
+          <div className="diverge-banner-wrapper">
+            <NewCommitsBanner
+              dispatcher={this.props.dispatcher}
+              repository={this.props.repository}
+              commitsBehindBaseBranch={
+                inferredComparisonBranch.aheadBehind.behind
+              }
+              baseBranch={inferredComparisonBranch.branch}
+              onDismiss={this.onNotificationBannerDismissed}
+            />
+          </div>
+        </CSSTransition>
+      </TransitionGroup>
     ) : null
   }
 

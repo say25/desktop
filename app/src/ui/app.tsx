@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { ipcRenderer, remote } from 'electron'
-import { CSSTransitionGroup } from 'react-transition-group'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import {
   IAppState,
@@ -1706,14 +1706,18 @@ export class App extends React.Component<IAppProps, IAppState> {
     }
 
     return (
-      <CSSTransitionGroup
-        transitionName="modal"
-        component="div"
-        transitionEnterTimeout={dialogTransitionEnterTimeout}
-        transitionLeaveTimeout={dialogTransitionLeaveTimeout}
-      >
-        {content}
-      </CSSTransitionGroup>
+      <TransitionGroup>
+        <CSSTransition
+          classNames="modal"
+          component="div"
+          timeout={{
+            enter: dialogTransitionEnterTimeout,
+            exit: dialogTransitionLeaveTimeout,
+          }}
+        >
+          {content}
+        </CSSTransition>
+      </TransitionGroup>
     )
   }
 
@@ -2029,14 +2033,15 @@ export class App extends React.Component<IAppProps, IAppState> {
     }
 
     return (
-      <CSSTransitionGroup
-        transitionName="banner"
-        component="div"
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={400}
-      >
-        {banner}
-      </CSSTransitionGroup>
+      <TransitionGroup>
+        <CSSTransition
+          classNames="banner"
+          component="div"
+          timeout={{ enter: 500, exit: 400 }}
+        >
+          {banner}
+        </CSSTransition>
+      </TransitionGroup>
     )
   }
 

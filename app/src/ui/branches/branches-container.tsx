@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { CSSTransitionGroup } from 'react-transition-group'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import { PullRequest } from '../../models/pull-request'
 import { Repository, nameOf } from '../../models/repository'
@@ -158,15 +158,19 @@ export class BranchesContainer extends React.Component<
 
       case BranchesTab.PullRequests: {
         return (
-          <CSSTransitionGroup
-            transitionName="cross-fade"
-            component="div"
-            id="pr-transition-div"
-            transitionEnterTimeout={PullRequestsLoadingCrossFadeInTimeout}
-            transitionLeaveTimeout={PullRequestsLoadingCrossFadeOutTimeout}
-          >
-            {this.renderPullRequests()}
-          </CSSTransitionGroup>
+          <TransitionGroup>
+            <CSSTransition
+              classNames="cross-fade"
+              component="div"
+              id="pr-transition-div"
+              timeout={{
+                enter: PullRequestsLoadingCrossFadeInTimeout,
+                exit: PullRequestsLoadingCrossFadeOutTimeout,
+              }}
+            >
+              {this.renderPullRequests()}
+            </CSSTransition>
+          </TransitionGroup>
         )
       }
     }

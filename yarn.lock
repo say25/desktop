@@ -361,10 +361,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-transition-group@1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-1.1.1.tgz#372fd2b4777b96aa983ac15fb5cc0ce150550aeb"
-  integrity sha512-LOXbB5NTmyaZeiysrSRhgQDGFic7gyavZ6HcBkWwSL7PW+aYRh/cOPO+wLp2YnHJLWTQz9Avr3qOXWCrWhGOfA==
+"@types/react-transition-group@^2.0.16":
+  version "2.0.16"
+  resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-2.0.16.tgz#2dcb9e396ab385ee19c4af1c9caa469a14cd042f"
+  integrity sha512-FUJEx2BGJPU1qVQoWd9v7wpOwnCPTWhcE4iTaU5prry9SvwiI11lCXOci8Nz9cM/Fuf650l7Skg6nlVeCYjPFA==
   dependencies:
     "@types/react" "*"
 
