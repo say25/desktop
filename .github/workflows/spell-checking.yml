@@ -1,0 +1,21 @@
+name: Spell Checking
+on:
+   pull_request:
+   push:
+   schedule:
+     # * is a special character in YAML so you have to quote this string
+     - cron: '60 * * * *'
+
+jobs:
+   build:
+     name: Spell Checking
+     runs-on: ubuntu-latest
+     steps:
+     - uses: actions/checkout@v2.0.0
+       with:
+         fetch-depth: 0
+     - uses: check-spelling/check-spelling@0.0.11-alpha
+       env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         bucket: .github/actions
+         project: spell-check
